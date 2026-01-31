@@ -17,6 +17,8 @@ const Schema = mongoose.Schema;
 //     country: String
 // });
 
+// intalizing models in new way
+
 const listingSchema = new Schema({
   title: {
     type: String,
