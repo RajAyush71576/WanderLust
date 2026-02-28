@@ -5,6 +5,8 @@ const path = require('path');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const ExpressError = require('./utils/ExpressError.js');
+const session = require("express-session");
+const flash = require('connect-flash');
 
 const listings = require('./routes/listing.js');
 const reviews = require('./routes/review.js');
@@ -18,6 +20,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname,"public")));
+
+const sessionOptions = {
+    secret: "mySuperSecretCode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    }
+};
+
+app.use(session(sessionOptions));
+app.use(flash());
 
 let MONGOOSE_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -37,6 +53,12 @@ app.listen(port, (req,res) =>{
 
 app.get('/', (req,res) =>{
     res.send("root is started");
+});
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
 });
 
 app.use('/listings', listings);
