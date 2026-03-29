@@ -66,9 +66,9 @@ app.listen(port, (req,res) =>{
     console.log(`app is working on port${port}`);
 });
 
-app.get('/', (req,res) =>{
-    res.send("root is started");
-});
+// app.get('/', (req,res) =>{
+//     res.send("root is started");
+// });
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
