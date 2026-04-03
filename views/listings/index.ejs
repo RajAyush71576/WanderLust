@@ -38,49 +38,53 @@
         }
     </style>
         <div id="filters">
-            <div class="filter">
-                <i class="fa-solid fa-fire"></i>
-                <p>Trending</p>
+            <div class="filter" data-category="Beach">
+                <i class="fa-solid fa-umbrella-beach"></i>
+                <p>Beach</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Rooms">
                 <i class="fa-solid fa-bed"></i>
                 <p>Rooms</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Iconic cities">
                 <i class="fa-solid fa-mountain-city"></i>
                 <p>Iconic cities</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Mountains">
                 <i class="fa-solid fa-mountain"></i>
                 <p>Mountains</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Castles">
                 <i class="fa-brands fa-fort-awesome"></i>
                 <p>Castles</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Amazing Pools">
                 <i class="fa-solid fa-person-swimming"></i>
                 <p>Amazing Pools</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Camping">
                 <i class="fa-solid fa-campground"></i>
                 <p>Camping</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Farms">
                 <i class="fa-solid fa-cow"></i>
                 <p>Farms</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Arctic">
                 <i class="fa-solid fa-snowflake"></i>
                 <p>Arctic</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Domes">
                 <i class="fa-solid fa-igloo"></i>
                 <p>Domes</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Boats">
                 <i class="fa-solid fa-sailboat"></i>
                 <p>Boats</p>
+            </div>
+            <div class="filter" data-category="Rural">
+                <i class="fa-solid fa-building-wheat"></i>
+                <p>Rural</p>
             </div>
 
             <div class="tax-toggle">
@@ -120,6 +124,17 @@
                     info.style.display = "none";
                 }
             }
+        });
+
+        let filters = document.querySelectorAll(".filter");
+
+        filters.forEach(filter => {
+        filter.addEventListener("click", function () {
+        let category = this.getAttribute("data-category");
+
+        // redirect to filtered page
+        window.location.href = `/listings?category=${category}`;
+        });
         });
     </script>
 </body>

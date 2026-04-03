@@ -8,6 +8,20 @@ module.exports.index = async (req,res) => {
     res.render("listings/index.ejs", { allListing });
 }
 
+module.exports.index = async (req,res) => {
+    let { category } = req.query;
+
+    let filter = {};
+
+    if (category) {
+        filter.category = { $regex: `^${category}$`, $options: "i" };
+    }
+
+    let allListing = await Listing.find(filter);
+
+    res.render("listings/index.ejs", { allListing, category });
+}
+
 module.exports.renderNewForm = (req,res) =>{
     res.render("listings/new.ejs");
 }
